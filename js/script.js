@@ -1,9 +1,9 @@
 /*----- constants -----*/
 const PLAYERS = {
     '1': 'X',
-    '-1': 'O',
-    'null': ''
-};
+    '-1': 'O', 
+    null: '' 
+}
 
 const COMBOS = [
     [0, 1, 2],
@@ -11,66 +11,83 @@ const COMBOS = [
     [6, 7, 8],
     [0, 3, 6],
     [1, 4, 7],
-    [1, 4, 7],
     [2, 5, 8],
-    [2, 4, 8],
-    [2, 4, 6]
+    [2, 4, 6],
+    [0, 4, 8]
 ];
 
 /*----- app's state (variables) -----*/
-let winner, turn, gameBoard;
-
+let winner, turn, gameBoard, winningCombo;
 
 /*----- cached element references -----*/
-const $squareEls = $('.square');
-const $messageEl = $('h2');
-const $buttonEl = $('button');
-const $gameBoardEl = $('#gameboard');
+let $squares = $('.square');
+let $turnHolder = $('h2');
+let $resetButton = $('button');
+let $fullGameBoard = $('#gameboard');
 
 /*----- event listeners -----*/
-$buttonEl.click(init); //click to reset game
-$gameBoardEl.on('click', '.square', handleClick)
-
+$fullGameBoard.on('click', '.square', handleClick);
+$resetButton.click(resetGame);
 
 /*----- functions -----*/
-init(); //initial load of game
+resetGame();
 
-function init() {
-    winner = false;
+function resetGame(){
     turn = 1;
+    winner = false;
+    winningCombo = [];
     gameBoard = new Array(9).fill(null);
+    $turnHolder.css('fontSize', '25px');
     render();
 }
 
 function handleClick(e) {
-    const position = e.target.dataset.index;
-    if(gameBoard[position]) return; //exit the function immediately 
-    gameBoard[position] = turn;
-    console.log(gameBoard);
+    let $currentSquareID = $(this).attr('id');
+    if (gameBoard[$currentSquareID] || Math.abs(winner) === 1) return;
+    gameBoard[$currentSquareID] = turn;
     turn *= -1;
-    winner = getWinner();
+    winner = checkWinner();
     render();
 }
 
+
 function render() {
     gameBoard.forEach(function (value, index) {
-        $squareEls.eq(index).text(PLAYERS[value]);       
-    })
-    if(!winner) {
-        $messageEl.text(`${PLAYERS[turn]}'s Turn`);
-    } else if (winner === 'T') {
-        $messageEl.text('Its a Tie');
-    } else {
-        $messageEl.text(`${PLAYERS[winner]} Wins!`)
+        $squares.eq(index).text(`${PLAYERS[value]}`).css('backgroundColor', "#fff");
+        console.log($squares.eq(index).text());
+    });
+    $turnHolder.css('backgroundColor', '#fff')
+    if (winner === 'T') {
+        $turnHolder.text('It\'s a tie');
+    }else if (!winner) {
+        $turnHolder.text(`${PLAYERS[turn]}'s turn`);
+    }else {
+        $turnHolder.text(`${PLAYERS[winner]} wins!`);
     }
+    crossLine(winningCombo);
 }
 
-function getWinner() {
+
+function checkWinner() {
     for (let i = 0; i < COMBOS.length; i++) {
         if (Math.abs(gameBoard[COMBOS[i][0]] + gameBoard[COMBOS[i][1]] + gameBoard[COMBOS[i][2]]) === 3) {
+            winningCombo = COMBOS[i];
             return gameBoard[COMBOS[i][0]];
         }
     }
     if (gameBoard.includes(null)) return false;
     return 'T';
+}
+
+function crossLine(winningCombo) {
+    winningCombo.forEach(number => {
+        let $currentSquare = $squares.eq(number);
+        $currentSquare.css('fontSize', '90px');
+        $currentSquare.css('transition', '0.7s ease');
+        $currentSquare.css('backgroundColor', 'var(--lightColor)');
+        $turnHolder.css('backgroundColor', 'var(--lightColor)');
+        $turnHolder.css('fontSize', '50px');
+        $turnHolder.css('letterSpacing', '0.2em' )
+        $turnHolder.css('transition', '0.7s ease');
+    });
 }

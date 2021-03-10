@@ -1,3 +1,8 @@
+:root {
+    --mainColor: rgba(169, 111, 228);
+    --lightColor: rgba(169, 111, 228, 0.2);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -18,11 +23,10 @@ footer {
     justify-content: center;
     height: 50px;
     color: #fff;
-    background-color: #a96fe4;
+    background-color: var(--mainColor);
 }
 
 header {
-    
     padding-left: 15px;
     box-shadow: 1px 1px 3px 1px #c2b8b8;
 }
@@ -33,6 +37,12 @@ main {
     justify-content: space-evenly;
     flex-direction: column;
     flex-grow: 1;
+}
+
+h2 {
+    width: 100vw;
+    text-align: center;
+    padding: 10px;
 }
 
 .square{
@@ -52,22 +62,32 @@ main {
 }
 
 .top{
-    border-top: 3px solid #a96fe4;
+    border-top: 3px solid var(--mainColor);
 }
 
 .right{
-    border-right: 3px solid #a96fe4;
+    border-right: 3px solid var(--mainColor);
 
 }
 
 .bottom{
-    border-bottom: 3px solid #a96fe4;
+    border-bottom: 3px solid var(--mainColor);
 
 }
 
 .left{
-    border-left: 3px solid #a96fe4;
+    border-left: 3px solid var(--mainColor);
 }
 
+button {
+    border: 10px solid var(--mainColor);
+    padding: 10px 20px;
+    font-size: 25px;
+    margin-top: 45px;
+    cursor: pointer;
+}
 
- 
+button:hover {
+    background-color: var(--mainColor);
+    color: #fff;
+}
