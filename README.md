@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-The classic game but for your browser!!
+The classic game but for your browser 🖥
 
 ## Technologies Used 
 - HTML5
