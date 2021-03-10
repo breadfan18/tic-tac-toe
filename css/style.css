@@ -1,21 +1,73 @@
-td {
-    border: 4px solid black;
-    height: 100px;
-    width: 100px;
+* {
+    box-sizing: border-box;
+    margin: 0;
 }
 
-.left{
-    border-left: none;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* justify-content: space-around; */
+}
+
+header,
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    color: #fff;
+    background-color: #a96fe4;
+}
+
+header {
+    
+    padding-left: 15px;
+    box-shadow: 1px 1px 3px 1px #c2b8b8;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.square{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 100px;
+    height: 200px;
+    width: 200px;
+}
+
+#gameboard {
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.top{
+    border-top: 3px solid #a96fe4;
 }
 
 .right{
-    border-right: none;
+    border-right: 3px solid #a96fe4;
+
 }
 
-.top td{
-    border-top: none;
+.bottom{
+    border-bottom: 3px solid #a96fe4;
+
 }
 
-.bottom td {
-    border-bottom: none;
+.left{
+    border-left: 3px solid #a96fe4;
 }
+
+
+ 
