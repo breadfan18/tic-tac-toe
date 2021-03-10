@@ -58,13 +58,21 @@ function render() {
     });
     $turnHolder.css('backgroundColor', '#fff')
     if (winner === 'T') {
-        $turnHolder.text('It\'s a tie');
+        $turnHolder.text('It\'s a tie!!');
+        $turnHolder.css('backgroundColor', 'var(--lightColor)');
+        $turnHolder.css('fontSize', '50px');
+        $turnHolder.css('letterSpacing', '0.2em' )
+        $turnHolder.css('transition', '0.7s ease');
     }else if (!winner) {
         $turnHolder.text(`${PLAYERS[turn]}'s turn`);
     }else {
         $turnHolder.text(`${PLAYERS[winner]} wins!`);
+        crossLine(winningCombo);
+        $turnHolder.css('backgroundColor', 'var(--lightColor)');
+        $turnHolder.css('fontSize', '50px');
+        $turnHolder.css('letterSpacing', '0.2em' )
+        $turnHolder.css('transition', '0.7s ease');
     }
-    crossLine(winningCombo);
 }
 
 
@@ -85,9 +93,5 @@ function crossLine(winningCombo) {
         $currentSquare.css('fontSize', '90px');
         $currentSquare.css('transition', '0.7s ease');
         $currentSquare.css('backgroundColor', 'var(--lightColor)');
-        $turnHolder.css('backgroundColor', 'var(--lightColor)');
-        $turnHolder.css('fontSize', '50px');
-        $turnHolder.css('letterSpacing', '0.2em' )
-        $turnHolder.css('transition', '0.7s ease');
     });
 }
