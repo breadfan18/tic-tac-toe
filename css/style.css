@@ -37,7 +37,7 @@ main {
     justify-content: space-evenly;
     flex-direction: column;
     flex-grow: 1;
-}
+} 
 
 h2 {
     width: 100vw;
